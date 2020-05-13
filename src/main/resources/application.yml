@@ -1,8 +1,11 @@
+mybatis:
+  mapper-locations: classpath*:/src/main/resources/com/example/mapper/*.xml
+  
 spring:
   # VSCodeのログの設定
-  output:
-   ansi:
-     enabled: always
+#  output:
+#   ansi:
+#     enabled: always
   # DBの設定(デプロイ時に変更)
   datasource:
     driverClassName: org.postgresql.Driver
@@ -17,10 +20,10 @@ spring:
 #    password: 802f27f88d33eb7e6db7802702696c1617983e629b27739878f7191c145dcdb6
 
 # ローカル環境での起動ポート番号の設定
-server:
-  port: 8080
+#server:
+#  port: 8080
 
 # 環境変数(デプロイ時に変更)
-environments:
-  originUrl: http://localhost:8888
+#environments:
+#  originUrl: http://localhost:8888
 #  originUrl: https://condition-meter.firebaseapp.com.firebaseapp.com

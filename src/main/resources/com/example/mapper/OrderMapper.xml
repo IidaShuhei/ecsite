@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.OrderMapper">
+
+	<!-- Order -->
+	<resultMap type="com.example.domain.Order" id="orderMap">
+		<id property="id" column="id" />
+		<result property="userId" column="userId" />
+		<result property="status" column="status" />
+		<result property="totalPrice" column="total_price" />
+		<result property="orderDate" column="order_date" />
+		<result property="destinationName" column="destination_name" />
+		<result property="destinationEmail" column="destination_email" />
+		<result property="destinationZipcode" column="destination_zipcode" />
+		<result property="destinationAddress" column="destination_address" />
+		<result property="destinationTel" column="destination_tel" />
+		<result property="delivaryTime" column="delivery_time" />
+		<result property="paymentMethod" column="payment_method" />
+	</resultMap>
+	<select id="purchase" resultType="Integer">
+		INSERT INTO 
+		orders(user_id,status,total_price,order_date,destination_name,destination_email,destination_zipcode,destination_address,destination_tel,delivery_time,payment_method)
+		VALUES(#{userId},#{status},#{totalPrice},#{orderDate},#{destinationName},#{destinationEmail},#{destinationZipcode},#{destinationAddress},#{destinationTel},#{deliveryTime},#{paymentMethod})
+		returning id
+	</select>
+
+	<!-- Order + OrderItem + OrderTopping + Topping + Item -->
+	<resultMap type="com.example.domain.Order" id="orderResultMap">
+		<id property="id" column="o_id" />
+		<result property="userId" column="o_userId" />
+		<result property="status" column="status" />
+		<result property="totalPrice" column="total_price" />
+		<result property="orderDate" column="order_date" />
+		<result property="destinationName" column="destination_name" />
+		<result property="destinationEmail" column="destination_email" />
+		<result property="destinationZipcode" column="destination_zipcode" />
+		<result property="destinationAddress" column="destination_address" />
+		<result property="destinationTel" column="destination_tel" />
+		<result property="delivaryTime" column="delivery_time" />
+		<result property="paymentMethod" column="payment_method" />
+		
+		<collection property="orderItemList" ofType="com.example.domain.OrderItem">
+			<id property="id" column="oi_id" />
+			<result property="itemId" column="item_id" />
+			<result property="orderId" column="order_id" />
+			<result property="quantity" column="quantity" />
+			<result property="size" column="size" />
+			
+			<association property="item" javaType="com.example.domain.Item">
+				<id property="id" column="i_id" />
+				<result property="name" column="i_name" />
+				<result property="description" column="description" />
+				<result property="priceM" column="i_price_m" />
+				<result property="priceL" column="i_price_l" />
+				<result property="imagePath" column="image_path" />
+				<result property="deleted" column="deleted" />
+				
+				<collection property="toppingList" ofType="com.example.domain.Topping">
+					<id property="id" column="t_id" />
+					<result property="name" column="t_name" />
+					<result property="priceM" column="t_price_m" />
+					<result property="priceM" column="t_price_l" />
+				</collection>
+			</association>
+			
+			<collection property="orderToppingList" ofType="com.example.domain.OrderTopping">
+				<id property="id" column="ot_id" />
+				<result property="toppingId" column="topping_id" />
+				<result property="orderItemId" column="order_item_id" />
+				
+				<association property="Topping" javaType="com.example.domain.Topping">
+					<id property="id" column="t_id" />
+					<result property="name" column="t_name" />
+					<result property="priceM" column="t_price_m" />
+					<result property="priceM" column="t_price_l" />
+				</association>
+			</collection>
+			
+		</collection>
+		
+	</resultMap>
+	
+	<select id="findByUserId" resultMap="orderResultMap">
+		SELECT 
+		o.id o_id,
+		o.user_id o_user_id,
+		status,
+		total_price,
+		order_date,
+		destination_name,
+		destination_email,
+		destination_zipcode,
+		destination_address,
+		destination_tel,
+		delivery_time,
+		payment_method, 
+		oi.id oi_id,
+		item_id,
+		order_id,
+		quantity,
+		size,
+		i.id i_id,
+		i.name i_name,
+		description,
+		i.price_m i_price_m,
+		i.price_l i_price_l,
+		image_path,
+		deleted, 
+		ot.id ot_id,
+		topping_id,
+		order_item_id, 
+		t.id t_id,
+		t.name t_name,
+		t.price_m t_price_m,
+		t.price_l t_price_l, 
+		FROM orders AS o 
+		LEFT JOIN order_Items AS oi ON o.id=order_id 
+		LEFT JOIN items AS i ON item_id=i.id 
+		LEFT JOIN order_toppings AS ot ON oi.id=order_item_id
+		LEFT JOIN toppings AS t ON topping_id=t.id
+		WHERE o.user_id = #{userId} 
+	</select>
+	
+	<select id="findByUserIdAndStatus" resultMap="orderResultMap">
+		SELECT 
+		o.id o_id,
+		o.user_id o_user_id,
+		status,
+		total_price,
+		order_date,
+		destination_name,
+		destination_email,
+		destination_zipcode,
+		destination_address,
+		destination_tel,
+		delivery_time,
+		payment_method, 
+		oi.id oi_id,
+		item_id,
+		order_id,
+		quantity,
+		size,
+		i.id i_id,
+		i.name i_name,
+		description,
+		i.price_m i_price_m,
+		i.price_l i_price_l,
+		image_path,
+		deleted, 
+		ot.id ot_id,
+		topping_id,
+		order_item_id, 
+		t.id t_id,
+		t.name t_name,
+		t.price_m t_price_m,
+		t.price_l t_price_l, 
+		FROM orders AS o 
+		LEFT JOIN order_Items AS oi ON o.id=order_id 
+		LEFT JOIN items AS i ON item_id=i.id 
+		LEFT JOIN order_toppings AS ot ON oi.id=order_item_id
+		LEFT JOIN toppings AS t ON topping_id=t.id
+		WHERE o.user_id = #{userId} 
+		AND o.status = #{status}
+		ORDER BY oi_id DESC
+	</select>
+	
+</mapper>
