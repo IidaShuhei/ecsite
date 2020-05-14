@@ -10,6 +10,7 @@
 		<result property="priceL" column="price_l" />
 		<result property="imagePath" column="image_path" />
 		<result property="deleted" column="deleted" />
+		
 	</resultMap>
 	<select id="findAll" resultMap="itemMap">
 		SELECT * from items order by price_m;

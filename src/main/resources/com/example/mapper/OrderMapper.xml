@@ -59,7 +59,7 @@
 					<id property="id" column="t_id" />
 					<result property="name" column="t_name" />
 					<result property="priceM" column="t_price_m" />
-					<result property="priceM" column="t_price_l" />
+					<result property="priceL" column="t_price_l" />
 				</collection>
 			</association>
 			
@@ -72,7 +72,7 @@
 					<id property="id" column="t_id" />
 					<result property="name" column="t_name" />
 					<result property="priceM" column="t_price_m" />
-					<result property="priceM" column="t_price_l" />
+					<result property="priceL" column="t_price_l" />
 				</association>
 			</collection>
 			

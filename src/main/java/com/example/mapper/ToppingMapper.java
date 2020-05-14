@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.example.domain.Item;
+import com.example.domain.Topping;
 
 @Mapper
-public interface ItemMapper {
+public interface ToppingMapper {
 
-	public List<Item> findAll();
+	public List<Topping> findAll();
 }

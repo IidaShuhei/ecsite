@@ -6,17 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.domain.Item;
-import com.example.mapper.ItemMapper;
+import com.example.domain.Topping;
+import com.example.mapper.ToppingMapper;
 
 @Service
 @Transactional
-public class ItemService {
+public class ToppingService {
 
 	@Autowired
-	private ItemMapper itemMapper;
+	private ToppingMapper toppingMapper;
 	
-	public List<Item> findAll() {
-		return itemMapper.findAll();
+	public List<Topping> findAll() {
+		return toppingMapper.findAll();
 	}
 }
