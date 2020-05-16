@@ -21,28 +21,7 @@ public class Order {
 	private String destinationTel;
 	private Timestamp deliveryTime;
 	private Integer paymentMethod;
-	private User user;
 	private List<OrderItem> orderItemList;
 	
-	public int getTax() {
-		
-		int tax = 0;
-		
-		for(OrderItem orderItem : orderItemList) {
-			tax += (orderItem.getSubTotal() * 0.1);
-		}
-		
-		return tax;
-	}
 	
-	public int getCalcTotalPrice() {
-		
-		int totalPrice = 0;
-		
-		for(OrderItem orderItem : orderItemList) {
-			totalPrice += orderItem.getSubTotal() + getTax();
-		}
-		
-		return totalPrice;
-	}
 }

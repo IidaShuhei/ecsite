@@ -24,7 +24,7 @@ public class RegisterUserController {
 		user.setZipcode(registerUserForm.getZipcode());
 		user.setAddress(registerUserForm.getAddress());
 		user.setTelephone(registerUserForm.getTelephone());
-		user.setPassword(registerUserForm.getPassword());
+		
 		return registerUserService.register(user);
 	}
 }

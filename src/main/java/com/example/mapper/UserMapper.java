@@ -9,6 +9,8 @@ import com.example.domain.User;
 public interface UserMapper {
 	
 	public LoginUser findByMail(String email);
+	
+	public User findAllByMail(String email);
 
 	public User register(User user);
 }

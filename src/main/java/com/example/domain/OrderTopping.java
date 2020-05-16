@@ -8,5 +8,5 @@ public class OrderTopping {
 	private Integer id;
 	private Integer toppingId;
 	private Integer orderToppingId;
-	private Topping topping;
+	
 }
