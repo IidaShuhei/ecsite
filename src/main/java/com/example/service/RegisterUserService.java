@@ -17,4 +17,6 @@ public class RegisterUserService {
 	public User register(User user) {
 		return userMapper.register(user);
 	}
+	
+	
 }

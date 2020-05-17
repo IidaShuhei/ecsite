@@ -10,6 +10,5 @@ public class RegisterUserForm {
 	private String zipcode;
 	private String address;
 	private String telephone;
-	private String password;
-	private String confirmationPassword;
+//	private String confirmationPassword;
 }

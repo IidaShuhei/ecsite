@@ -6,7 +6,6 @@
 		<id property="id" column="id" />
 		<result property="name" column="name" />
 		<result property="email" column="email" />
-		<result property="password" column="password" />
 		<result property="zipcode" column="zipcode" />
 		<result property="address" column="address" />
 		<result property="telephone" column="telephone" />
@@ -15,8 +14,8 @@
 
 	<select id="register" resultMap="UserResultMap">
 		INSERT INTO
-		users(name,email,password,zipcode,address,telephone)
-		values(#{name},#{email},#{password},#{zipcode},#{address},#{telephone})
+		users(name,email,zipcode,address,telephone)
+		values(#{name},#{email},#{zipcode},#{address},#{telephone})
 	</select>
 
 	<select id="findByMail" resultMap="UserResultMap">
