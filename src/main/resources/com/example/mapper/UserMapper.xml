@@ -36,38 +36,32 @@
 		<result property="address" column="u_address"></result>
 		<result property="telephone" column="u_telephone"></result>
 
-		<collection property="orderList"
-			ofType="com.example.domain.Order">
+		<collection property="orderList" ofType="com.example.domain.Order">
+		
 			<id property="id" column="o_id"></id>
 			<result property="userId" column="o_user_id"></result>
 			<result property="status" column="o_status"></result>
 			<result property="totalPrice" column="o_total_price"></result>
 			<result property="orderDate" column="o_order_date"></result>
 			<result property="destinationName" column="o_destination_name"></result>
-			<result property="destinationEmail"
-				column="o_destination_email"></result>
-			<result property="destinationZipcode"
-				column="o_destination_zipcode"></result>
-			<result property="destinationAddress"
-				column="o_destination_address"></result>
+			<result property="destinationEmail" column="o_destination_email"></result>
+			<result property="destinationZipcode" column="o_destination_zipcode"></result>
+			<result property="destinationAddress" column="o_destination_address"></result>
 			<result property="destinationTel" column="o_destination_tel"></result>
 			<result property="deliveryTime" column="o_delivery_time"></result>
 			<result property="paymentMethod" column="o_payment_method"></result>
 
-			<collection property="orderItemList"
-				ofType="com.example.domain.OrderItem">
+			<collection property="orderItemList" ofType="com.example.domain.OrderItem">
 				<id property="id" column="oi_id"></id>
 				<result property="itemId" column="oi_item_id"></result>
-				<result property="orderId" column="oi_orderr_id"></result>
+				<result property="orderId" column="oi_order_id"></result>
 				<result property="quantity" column="oi_quantity"></result>
 				<result property="size" column="oi_size"></result>
-				<collection property="orderToppingList"
-					ofType="com.example.domain.OrderTopping">
+				
+				<collection property="orderToppingList" ofType="com.example.domain.OrderTopping">
 					<id property="id" column="ot_id"></id>
-					<result property="itemId" column="oi_item_id"></result>
-					<result property="orderId" column="oi_order_id"></result>
-					<result property="quantity" column="oi_quantity"></result>
-					<result property="size" column="oi_size"></result>
+					<result property="toppingId" column="oi_topping_id"></result>
+					<result property="orderItemId" column="oi_order_item_id"></result>
 
 				</collection>
 
@@ -106,18 +100,15 @@
 		oi.id oi_id,
 		oi.item_id oi_item_id,
 		oi.order_id oi_order_id,
-		oi.quantity
-		oi_quantity,
+		oi.quantity oi_quantity,
 		oi.size oi_size,
 		ot.id ot_id,
 		ot.topping_id ot_topping_id,
 		ot.order_item_id ot_order_item_id
 		FROM users u
 		LEFT OUTER JOIN orders o ON u.id = o.user_id
-		LEFT OUTER JOIN order_items oi
-		ON o.id = oi.order_id
-		LEFT OUTER JOIN order_toppings ot ON oi.id =
-		ot.order_item_id
+		LEFT OUTER JOIN order_items oi ON o.id = oi.order_id
+		LEFT OUTER JOIN order_toppings ot ON oi.id = ot.order_item_id
 		WHERE u.email =#{email}
 
 

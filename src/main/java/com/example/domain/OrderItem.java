@@ -13,6 +13,5 @@ public class OrderItem {
 	private Integer quantity;
 	private Character size;
 	private List<OrderTopping> orderToppingList;
-	
-	
+
 }

@@ -23,5 +23,4 @@ public class Order {
 	private Integer paymentMethod;
 	private List<OrderItem> orderItemList;
 	
-	
 }

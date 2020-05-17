@@ -3,6 +3,7 @@
 <mapper namespace="com.example.mapper.ItemMapper">
 
 	<resultMap type="com.example.domain.Item" id="itemMap">
+	
 		<id property="id" column="id" />
 		<result property="name" column="name" />
 		<result property="description" column="description" />
@@ -12,6 +13,7 @@
 		<result property="deleted" column="deleted" />
 		
 	</resultMap>
+	
 	<select id="findAll" resultMap="itemMap">
 		SELECT * from items order by price_m;
 	</select>

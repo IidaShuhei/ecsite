@@ -24,4 +24,5 @@ public class OrderForm {
 	private Timestamp deliveryTime;
 	private Integer paymentMethod;
 	private List<OrderItem> orderItemList;
+
 }

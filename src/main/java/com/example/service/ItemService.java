@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.domain.Item;
 import com.example.mapper.ItemMapper;
+import com.example.mapper.ToppingMapper;
 
 @Service
 @Transactional
@@ -16,7 +17,17 @@ public class ItemService {
 	@Autowired
 	private ItemMapper itemMapper;
 	
+	@Autowired
+	private ToppingMapper toppingMapper;
+	
 	public List<Item> findAll() {
-		return itemMapper.findAll();
+		
+		List<Item> itemList = itemMapper.findAll();
+		
+		for(Item item : itemList) {
+			item.setToppingList(toppingMapper.findAll());
+		}
+		
+		return itemList;
 	}
 }
