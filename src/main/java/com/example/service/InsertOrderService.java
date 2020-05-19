@@ -16,7 +16,7 @@ import com.example.mapper.OrderMapper;
 
 @Service
 @Transactional
-public class OrderService {
+public class InsertOrderService {
 
 	@Autowired
 	private OrderMapper orderMapper;
@@ -30,6 +30,10 @@ public class OrderService {
 		order.setDestinationZipcode(orderForm.getDestinationZipcode());
 		order.setDestinationAddress(orderForm.getDestinationAddress());
 		order.setDestinationTel(orderForm.getDestinationTel());
+		
+		
+		order.setUserId(1);
+		order.setStatus(1);
 		
 		
 		Date date = new Date();
@@ -54,9 +58,7 @@ public class OrderService {
 			order.setPaymentMethod(2);
 		}
 		
-		
 		orderMapper.purchase(order);
-		
 		
 		List<Order> orderList = orderMapper.findByUserId(orderForm.getUserId());
 		return orderList;

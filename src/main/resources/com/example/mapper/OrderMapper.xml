@@ -17,12 +17,12 @@
 		<result property="delivaryTime" column="delivery_time" />
 		<result property="paymentMethod" column="payment_method" />
 	</resultMap>
-	<select id="purchase" resultType="Integer">
+	<insert id="purchase" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO 
 		orders(user_id,status,total_price,order_date,destination_name,destination_email,destination_zipcode,destination_address,destination_tel,delivery_time,payment_method)
 		VALUES(#{userId},#{status},#{totalPrice},#{orderDate},#{destinationName},#{destinationEmail},#{destinationZipcode},#{destinationAddress},#{destinationTel},#{deliveryTime},#{paymentMethod})
 		returning id
-	</select>
+	</insert>
 
 	<!-- Order + OrderItem + OrderTopping + Topping + Item -->
 	<resultMap type="com.example.domain.Order" id="orderResultMap">
@@ -112,7 +112,7 @@
 		t.id t_id,
 		t.name t_name,
 		t.price_m t_price_m,
-		t.price_l t_price_l, 
+		t.price_l t_price_l
 		FROM orders AS o 
 		LEFT JOIN order_Items AS oi ON o.id=order_id 
 		LEFT JOIN items AS i ON item_id=i.id 
@@ -153,7 +153,7 @@
 		t.id t_id,
 		t.name t_name,
 		t.price_m t_price_m,
-		t.price_l t_price_l, 
+		t.price_l t_price_l
 		FROM orders AS o 
 		LEFT JOIN order_Items AS oi ON o.id=order_id 
 		LEFT JOIN items AS i ON item_id=i.id 

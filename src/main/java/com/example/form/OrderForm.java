@@ -1,6 +1,5 @@
 package com.example.form;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class OrderForm {
 	private String destinationAddress;
 	private String destinationTel;
 	private String deliveryDate;
-	private Timestamp deliveryTime;
+	private String deliveryTime;
 	private Integer paymentMethod;
 	private List<OrderItem> orderItemList;
 

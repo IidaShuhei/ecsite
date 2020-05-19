@@ -10,20 +10,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.domain.Order;
 import com.example.form.OrderForm;
-import com.example.service.OrderService;
+import com.example.service.InsertOrderService;
 
 @RestController
 @RequestMapping("/purchase")
-public class OrderController {
+public class InsertOrderController {
 
 	@Autowired
-	private OrderService orderService;
+	private InsertOrderService orderService;
 	
 	@CrossOrigin()
 	@RequestMapping("")
 	public List<Order> purchase(@RequestBody OrderForm orderForm) {
-		
-		System.err.println("form : " + orderForm);
 		
 		return orderService.purchase(orderForm);
 	}

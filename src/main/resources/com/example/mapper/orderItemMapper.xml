@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.OrderItemMapper">
+	
+	<!-- OrderItem -->
+	<resultMap type="com.example.domain.OrderItem" id="orderItemMap">
+		<id property="id" column="id" />
+		<result property="itemId" column="itemId" />
+		<result property="orderId" column="order_id" />
+		<result property="quantity" column="quantity" />
+		<result property="size" column="size" />
+	</resultMap>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO 
+		order_items(item_id,order_id,quantity,size)
+		VALUES(#{itemId},#{orderId},#{quantity},#{size})
+		returning id
+	</insert>
+	
+</mapper>

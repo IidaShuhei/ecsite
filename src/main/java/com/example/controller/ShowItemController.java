@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.domain.Item;
-import com.example.service.ItemService;
+import com.example.service.ShowItemService;
 
 @RestController
 @RequestMapping("/item")
-public class ItemController {
+public class ShowItemController {
 
 	@Autowired
-	private ItemService itemService;
+	private ShowItemService itemService;
 	
 	@CrossOrigin()
 	@RequestMapping("/showItems")

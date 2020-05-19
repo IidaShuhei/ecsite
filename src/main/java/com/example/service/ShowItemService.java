@@ -12,7 +12,7 @@ import com.example.mapper.ToppingMapper;
 
 @Service
 @Transactional
-public class ItemService {
+public class ShowItemService {
 
 	@Autowired
 	private ItemMapper itemMapper;
