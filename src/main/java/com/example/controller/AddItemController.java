@@ -18,10 +18,10 @@ public class AddItemController {
 	
 	@CrossOrigin()
 	@RequestMapping("")
-	public void AddItem(@RequestBody OrderItemForm orderItemForm) {
+	public Integer AddItem(@RequestBody OrderItemForm orderItemForm) {
 		
 		System.err.println("注文 : " + orderItemForm);
 		
-		addItemService.addItem(orderItemForm);
+		return addItemService.addItem(orderItemForm);
 	}
 }

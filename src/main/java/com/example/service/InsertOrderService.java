@@ -21,9 +21,13 @@ public class InsertOrderService {
 	@Autowired
 	private OrderMapper orderMapper;
 	
-	public List<Order> purchase(OrderForm orderForm){
+	public void purchase(OrderForm orderForm){
 		
-		Order order = new Order();
+		List<Order> orderList = orderMapper.findByUserIdAndStatus(1, 0);
+		
+		System.err.println("注文リスト : " + orderList);
+		
+		Order order = orderList.get(0);
 		order.setTotalPrice(orderForm.getTotalPrice());
 		order.setDestinationName(orderForm.getDestinationName());
 		order.setDestinationEmail(orderForm.getDestinationEmail());
@@ -33,7 +37,7 @@ public class InsertOrderService {
 		
 		
 		order.setUserId(1);
-		order.setStatus(1);
+		order.setStatus(2);
 		
 		
 		Date date = new Date();
@@ -58,9 +62,7 @@ public class InsertOrderService {
 			order.setPaymentMethod(2);
 		}
 		
-		orderMapper.purchase(order);
+		orderMapper.update(order);
 		
-		List<Order> orderList = orderMapper.findByUserId(orderForm.getUserId());
-		return orderList;
 	}
 }

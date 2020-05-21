@@ -5,17 +5,22 @@
 	<!-- OrderItem -->
 	<resultMap type="com.example.domain.OrderItem" id="orderItemMap">
 		<id property="id" column="id" />
-		<result property="itemId" column="itemId" />
+		<result property="itemId" column="item_id" />
 		<result property="orderId" column="order_id" />
 		<result property="quantity" column="quantity" />
 		<result property="size" column="size" />
+		<result property="subTotal" column="sub_total" />
 	</resultMap>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO 
-		order_items(item_id,order_id,quantity,size)
-		VALUES(#{itemId},#{orderId},#{quantity},#{size})
+		order_items(item_id,order_id,quantity,size,sub_total)
+		VALUES(#{itemId},#{orderId},#{quantity},#{size},#{subTotal})
 		returning id
 	</insert>
+	
+	<delete id="delete">
+		delete from order_items where id = #{id}
+	</delete>
 	
 </mapper>

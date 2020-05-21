@@ -8,4 +8,6 @@ import com.example.domain.OrderItem;
 public interface OrderItemMapper {
 
 	public Integer insert(OrderItem orderItem);
+	
+	public void delete(Integer id);
 }

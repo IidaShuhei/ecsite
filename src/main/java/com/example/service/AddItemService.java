@@ -29,13 +29,14 @@ public class AddItemService {
 	
 	
 	//「商品をかごに追加」ボタンを押されたら発動するメソッド
-	public void addItem(OrderItemForm orderItemForm) {
+	public Integer addItem(OrderItemForm orderItemForm) {
 		
 		Order order = null;
 		int status = 0;
 		int userId = 1;
 		
 		List<Order> orderList = orderMapper.findByUserIdAndStatus(userId, status);
+		
 		Integer orderToppingId[] = orderItemForm.getOrderTopping();
 		
 		//もしuserIdとstatusが0のものがDBになければ新しい注文リストを作成
@@ -47,14 +48,13 @@ public class AddItemService {
 			order.setTotalPrice(0);
 			orderMapper.purchase(order);
 			
-			System.err.println("orderID : " + order.getId());
-			
 			//orderItemテーブルに挿入
 			OrderItem orderItem = new OrderItem();
 			orderItem.setItemId(orderItemForm.getItemId());
 			orderItem.setOrderId(order.getId());
 			orderItem.setQuantity(orderItemForm.getQuantity());
 			orderItem.setSize(orderItemForm.getSize());
+			orderItem.setSubTotal(orderItemForm.getSubTotal());
 			orderItemMapper.insert(orderItem);
 			
 			//orderToppingテーブルに挿入（トッピングがあれば）
@@ -66,6 +66,8 @@ public class AddItemService {
 					orderToppingMapper.insert(orderTopping);
 				}
 			}
+			
+			return orderItem.getId();
 			
 		} else {
 			
@@ -78,6 +80,7 @@ public class AddItemService {
 			orderItem.setOrderId(existOrder.getId());
 			orderItem.setQuantity(orderItemForm.getQuantity());
 			orderItem.setSize(orderItemForm.getSize());
+			orderItem.setSubTotal(orderItemForm.getSubTotal());
 			orderItemMapper.insert(orderItem);
 			
 			//orderToppingテーブルに挿入（トッピングがあれば）
@@ -90,6 +93,8 @@ public class AddItemService {
 					
 				}
 			}
+			
+			return orderItem.getId();
 			
 		}
 	}

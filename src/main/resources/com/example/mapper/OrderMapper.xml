@@ -17,12 +17,28 @@
 		<result property="delivaryTime" column="delivery_time" />
 		<result property="paymentMethod" column="payment_method" />
 	</resultMap>
+	
 	<insert id="purchase" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO 
 		orders(user_id,status,total_price,order_date,destination_name,destination_email,destination_zipcode,destination_address,destination_tel,delivery_time,payment_method)
 		VALUES(#{userId},#{status},#{totalPrice},#{orderDate},#{destinationName},#{destinationEmail},#{destinationZipcode},#{destinationAddress},#{destinationTel},#{deliveryTime},#{paymentMethod})
 		returning id
 	</insert>
+	
+	<update id="update">
+		update orders set 
+		destination_name=#{destinationName},
+		destination_email=#{destinationEmail},
+		destination_zipcode=#{destinationZipcode},
+		destination_address=#{destinationAddress},
+		destination_tel=#{destinationTel},
+		delivery_time=#{deliveryTime},
+		payment_method=#{paymentMethod},
+		status=#{status},
+		order_date=#{orderDate},
+		total_price=#{totalPrice} 
+		where id = #{id}
+	</update>
 
 	<!-- Order + OrderItem + OrderTopping + Topping + Item -->
 	<resultMap type="com.example.domain.Order" id="orderResultMap">
@@ -45,7 +61,8 @@
 			<result property="orderId" column="order_id" />
 			<result property="quantity" column="quantity" />
 			<result property="size" column="size" />
-			
+			<result property="subTotal" column="sub_total" />
+
 			<association property="item" javaType="com.example.domain.Item">
 				<id property="id" column="i_id" />
 				<result property="name" column="i_name" />
@@ -54,30 +71,23 @@
 				<result property="priceL" column="i_price_l" />
 				<result property="imagePath" column="image_path" />
 				<result property="deleted" column="deleted" />
-				
-				<collection property="toppingList" ofType="com.example.domain.Topping">
-					<id property="id" column="t_id" />
-					<result property="name" column="t_name" />
-					<result property="priceM" column="t_price_m" />
-					<result property="priceL" column="t_price_l" />
-				</collection>
+
 			</association>
-			
+
 			<collection property="orderToppingList" ofType="com.example.domain.OrderTopping">
 				<id property="id" column="ot_id" />
 				<result property="toppingId" column="topping_id" />
 				<result property="orderItemId" column="order_item_id" />
-				
-				<association property="Topping" javaType="com.example.domain.Topping">
+
+				<association property="topping" javaType="com.example.domain.Topping">
 					<id property="id" column="t_id" />
 					<result property="name" column="t_name" />
 					<result property="priceM" column="t_price_m" />
-					<result property="priceL" column="t_price_l" />
+					<result property="priceM" column="t_price_l" />
 				</association>
 			</collection>
-			
+
 		</collection>
-		
 	</resultMap>
 	
 	<select id="findByUserId" resultMap="orderResultMap">
@@ -99,6 +109,7 @@
 		order_id,
 		quantity,
 		size,
+		sub_total,
 		i.id i_id,
 		i.name i_name,
 		description,
@@ -140,6 +151,7 @@
 		order_id,
 		quantity,
 		size,
+		sub_total,
 		i.id i_id,
 		i.name i_name,
 		description,
@@ -161,7 +173,6 @@
 		LEFT JOIN toppings AS t ON topping_id=t.id
 		WHERE o.user_id = #{userId} 
 		AND o.status = #{status}
-		ORDER BY oi_id DESC
 	</select>
 	
 </mapper>

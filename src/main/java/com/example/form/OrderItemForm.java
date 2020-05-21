@@ -9,5 +9,6 @@ public class OrderItemForm {
 	private Integer quantity;
 	private Character size;
 	private Integer[] orderTopping;
+	private Integer subTotal;
 
 }

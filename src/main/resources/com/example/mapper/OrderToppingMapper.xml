@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.OrderToppingMapper">
 
-	<!-- OrderItem -->
+	<!-- OrderTopping -->
 	<resultMap type="com.example.domain.OrderTopping" id="orderToppingMap">
 		<id property="id" column="id" />
 		<result property="toppingId" column="topping_id" />
@@ -14,5 +14,9 @@
 		order_toppings(topping_id,order_item_id)
 		VALUES(#{toppingId},#{orderItemId})
 	</select>
+	
+	<delete id="delete">
+		delete from order_toppings where order_item_id = #{id}
+	</delete>
 
 </mapper>

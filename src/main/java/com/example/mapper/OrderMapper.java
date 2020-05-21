@@ -14,4 +14,6 @@ public interface OrderMapper {
 	public List<Order> findByUserId(Integer userId);
 	
 	public List<Order> findByUserIdAndStatus(Integer userId, Integer status);
+	
+	public void update(Order order);
 }
