@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.domain.CreditCard;
 import com.example.domain.Order;
 import com.example.form.OrderForm;
 import com.example.mapper.OrderMapper;
@@ -24,8 +25,6 @@ public class InsertOrderService {
 	public void purchase(OrderForm orderForm){
 		
 		List<Order> orderList = orderMapper.findByUserIdAndStatus(1, 0);
-		
-		System.err.println("注文リスト : " + orderList);
 		
 		Order order = orderList.get(0);
 		order.setTotalPrice(orderForm.getTotalPrice());
@@ -60,6 +59,13 @@ public class InsertOrderService {
 			order.setPaymentMethod(1);
 		} else if (orderForm.getPaymentMethod() == 2) {
 			order.setPaymentMethod(2);
+			
+			CreditCard creditCard = new CreditCard();
+			creditCard.setCardNumber(orderForm.getCardNumber());
+			creditCard.setCardExpYear(orderForm.getCardExpYear());
+			creditCard.setCardExpMonth(orderForm.getCardExpMonth());
+			creditCard.setCardName(orderForm.getCardName());
+			creditCard.setCardCvv(orderForm.getCardCvv());
 		}
 		
 		orderMapper.update(order);

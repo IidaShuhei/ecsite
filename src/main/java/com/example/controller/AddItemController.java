@@ -20,8 +20,6 @@ public class AddItemController {
 	@RequestMapping("")
 	public Integer AddItem(@RequestBody OrderItemForm orderItemForm) {
 		
-		System.err.println("注文 : " + orderItemForm);
-		
 		return addItemService.addItem(orderItemForm);
 	}
 }

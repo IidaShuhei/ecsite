@@ -23,5 +23,11 @@ public class OrderForm {
 	private String deliveryTime;
 	private Integer paymentMethod;
 	private List<OrderItem> orderItemList;
+	
+	private String cardNumber;
+	private String cardExpYear;
+	private String cardExpMonth;
+	private String cardName;
+	private String cardCvv;
 
 }
