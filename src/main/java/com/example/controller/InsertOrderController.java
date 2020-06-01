@@ -1,6 +1,4 @@
 package com.example.controller;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +18,9 @@ public class InsertOrderController {
 	@CrossOrigin()
 	@RequestMapping("")
 	public void purchase(@RequestBody OrderForm orderForm) {
+		
+		System.err.println("注文 : " + orderForm);
+		
 		orderService.purchase(orderForm);
 	}
 }

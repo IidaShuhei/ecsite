@@ -20,9 +20,15 @@
 
 	<select id="findByMail" resultMap="UserResultMap">
 		SELECT
-		name,email,password,zipcode,address,telephone
+		name,email,zipcode,address,telephone
 		from users where email = #{email}
 
+	</select>
+	
+	<select id="findById" resultMap="UserResultMap">
+		SELECT
+		id,name,email,zipcode,address,telephone
+		from users where id = #{id}
 	</select>
 
 	<!-- LoginUserオブジェクト+α -->

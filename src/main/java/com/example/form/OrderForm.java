@@ -25,8 +25,7 @@ public class OrderForm {
 	private List<OrderItem> orderItemList;
 	
 	private String cardNumber;
-	private String cardExpYear;
-	private String cardExpMonth;
+	private String cardExpYearAndMonth;
 	private String cardName;
 	private String cardCvv;
 

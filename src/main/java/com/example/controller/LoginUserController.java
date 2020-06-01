@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +22,12 @@ public class LoginUserController {
 	@CrossOrigin()
 	@RequestMapping("/findAllByMail")
 	public User findAllByMail(@RequestBody LoginForm loginForm) {
-		System.out.println(loginForm.getEmail());
 		return loginUserService.findAllByMail(loginForm.getEmail());
+	}
+	
+	@CrossOrigin()
+	@RequestMapping("/findById")
+	public User findById(@RequestBody Map<String, Integer> param) {
+		return loginUserService.findById(param.get("userId"));
 	}
 }

@@ -6,8 +6,7 @@ import lombok.Data;
 public class CreditCard {
 
 	private String cardNumber;
-	private String cardExpYear;
-	private String cardExpMonth;
+	private String cardExpYearAndMonth;
 	private String cardName;
 	private String cardCvv;
 }

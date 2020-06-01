@@ -62,8 +62,7 @@ public class InsertOrderService {
 			
 			CreditCard creditCard = new CreditCard();
 			creditCard.setCardNumber(orderForm.getCardNumber());
-			creditCard.setCardExpYear(orderForm.getCardExpYear());
-			creditCard.setCardExpMonth(orderForm.getCardExpMonth());
+			creditCard.setCardExpYearAndMonth(orderForm.getCardExpYearAndMonth());
 			creditCard.setCardName(orderForm.getCardName());
 			creditCard.setCardCvv(orderForm.getCardCvv());
 		}

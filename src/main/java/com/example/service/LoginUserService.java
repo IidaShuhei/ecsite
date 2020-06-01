@@ -17,4 +17,8 @@ public class LoginUserService {
 	public User findAllByMail(String email) {
 		return userMapper.findAllByMail(email);
 	}
+	
+	public User findById(Integer id) {
+		return userMapper.findById(id);
+	}
 }

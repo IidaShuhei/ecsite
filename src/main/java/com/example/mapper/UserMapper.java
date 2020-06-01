@@ -13,4 +13,6 @@ public interface UserMapper {
 	public User findAllByMail(String email);
 
 	public User register(User user);
+	
+	public User findById(Integer id);
 }
