@@ -39,6 +39,18 @@
 		total_price=#{totalPrice} 
 		where id = #{id}
 	</update>
+	
+	<select id="count" resultMap="orderMap">
+		SELECT 
+		count(*) 
+		FROM 
+		order_items AS oi
+		JOIN orders AS o
+		on oi.order_id = o.id
+		WHERE
+		user_id = #{userId} 
+		AND status = #{status}
+	</select>
 
 	<!-- Order + OrderItem + OrderTopping + Topping + Item -->
 	<resultMap type="com.example.domain.Order" id="orderResultMap">

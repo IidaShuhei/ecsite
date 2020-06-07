@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.domain.CreditCard;
 import com.example.domain.Order;
+import com.example.domain.PaymentMethod;
+import com.example.domain.Status;
 import com.example.form.OrderForm;
 import com.example.mapper.OrderMapper;
 
@@ -24,7 +26,15 @@ public class InsertOrderService {
 	
 	public void purchase(OrderForm orderForm){
 		
-		List<Order> orderList = orderMapper.findByUserIdAndStatus(1, 0);
+		int statusBefore = Status.BEFORE.getStatusId();
+		int statusPaid = Status.PAID.getStatusId();
+		
+		int cash = PaymentMethod.CASH.getPaymentMethodId();
+		int credit = PaymentMethod.CREDIT.getPaymentMethodId();
+		
+		int userId = orderForm.getUserId();
+		
+		List<Order> orderList = orderMapper.findByUserIdAndStatus(userId, statusBefore);
 		
 		Order order = orderList.get(0);
 		order.setTotalPrice(orderForm.getTotalPrice());
@@ -35,8 +45,8 @@ public class InsertOrderService {
 		order.setDestinationTel(orderForm.getDestinationTel());
 		
 		
-		order.setUserId(1);
-		order.setStatus(2);
+		order.setUserId(userId);
+		order.setStatus(statusPaid);
 		
 		
 		Date date = new Date();
@@ -55,10 +65,10 @@ public class InsertOrderService {
 		order.setDeliveryTime(timeStamp);
 		
 		
-		if(orderForm.getPaymentMethod() == 1) {
-			order.setPaymentMethod(1);
-		} else if (orderForm.getPaymentMethod() == 2) {
-			order.setPaymentMethod(2);
+		if(orderForm.getPaymentMethod() == cash) {
+			order.setPaymentMethod(cash);
+		} else if (orderForm.getPaymentMethod() == credit) {
+			order.setPaymentMethod(credit);
 			
 			CreditCard creditCard = new CreditCard();
 			creditCard.setCardNumber(orderForm.getCardNumber());
