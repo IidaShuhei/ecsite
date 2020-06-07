@@ -21,7 +21,9 @@ public class LoginUserController {
 
 	@RequestMapping("/findAllByMail")
 	public User findAllByMail(@RequestBody LoginForm loginForm) {
-		return loginUserService.findAllByMail(loginForm.getEmail());
+		User user =  loginUserService.findAllByMail(loginForm.getEmail());
+//		System.out.println(user);
+		return user;
 	}
 	
 

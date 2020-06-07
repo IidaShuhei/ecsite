@@ -41,7 +41,7 @@
 	</update>
 
 	<!-- Order + OrderItem + OrderTopping + Topping + Item -->
-	<resultMap type="com.example.domain.Order" id="orderResultMap">
+	<resultMap type="com.example.domain.Order" id="order">
 		<id property="id" column="o_id" />
 		<result property="userId" column="o_userId" />
 		<result property="status" column="status" />
@@ -52,7 +52,7 @@
 		<result property="destinationZipcode" column="destination_zipcode" />
 		<result property="destinationAddress" column="destination_address" />
 		<result property="destinationTel" column="destination_tel" />
-		<result property="delivaryTime" column="delivery_time" />
+		<result property="deliveryTime" column="delivery_time" />
 		<result property="paymentMethod" column="payment_method" />
 		
 		<collection property="orderItemList" ofType="com.example.domain.OrderItem">
@@ -90,7 +90,7 @@
 		</collection>
 	</resultMap>
 	
-	<select id="findByUserId" resultMap="orderResultMap">
+	<select id="findByUserId" resultMap="order">
 		SELECT 
 		o.id o_id,
 		o.user_id o_user_id,
@@ -132,7 +132,7 @@
 		WHERE o.user_id = #{userId} 
 	</select>
 	
-	<select id="findByUserIdAndStatus" resultMap="orderResultMap">
+	<select id="findByUserIdAndStatus" resultMap="order">
 		SELECT 
 		o.id o_id,
 		o.user_id o_user_id,
@@ -173,6 +173,7 @@
 		LEFT JOIN toppings AS t ON topping_id=t.id
 		WHERE o.user_id = #{userId} 
 		AND o.status = #{status}
+		ORDER BY o.id DESC,oi.id
 	</select>
 	
 </mapper>

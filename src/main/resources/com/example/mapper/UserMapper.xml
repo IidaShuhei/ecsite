@@ -62,12 +62,29 @@
 				<result property="orderId" column="oi_order_id"></result>
 				<result property="quantity" column="oi_quantity"></result>
 				<result property="size" column="oi_size"></result>
+				<result property="subTotal" column="sub_total" />
+				
+			 <association property="item" javaType="com.example.domain.Item">
+				<id property="id" column="i_id" />
+				<result property="name" column="i_name" />
+				<result property="description" column="description" />
+				<result property="priceM" column="i_price_m" />
+				<result property="priceL" column="i_price_l" />
+				<result property="imagePath" column="image_path" />
+				<result property="deleted" column="deleted" />
+
+			 </association>
 				
 				<collection property="orderToppingList" ofType="com.example.domain.OrderTopping">
 					<id property="id" column="ot_id"></id>
-					<result property="toppingId" column="oi_topping_id"></result>
-					<result property="orderItemId" column="oi_order_item_id"></result>
-
+					<result property="toppingId" column="ot_topping_id"></result>
+					<result property="orderItemId" column="ot_order_item_id"></result>
+                  <association property="topping" javaType="com.example.domain.Topping">
+					<id property="id" column="t_id" />
+					<result property="name" column="t_name" />
+					<result property="priceM" column="t_price_m" />
+					<result property="priceM" column="t_price_l" />
+				  </association>
 				</collection>
 
 			</collection>
@@ -107,13 +124,27 @@
 		oi.order_id oi_order_id,
 		oi.quantity oi_quantity,
 		oi.size oi_size,
+		sub_total,
+		i.id i_id,
+		i.name i_name,
+		description,
+		i.price_m i_price_m,
+		i.price_l i_price_l,
+		image_path,
+		deleted, 
 		ot.id ot_id,
 		ot.topping_id ot_topping_id,
-		ot.order_item_id ot_order_item_id
+		ot.order_item_id ot_order_item_id,
+		t.id t_id,
+		t.name t_name,
+		t.price_m t_price_m,
+		t.price_l t_price_l
 		FROM users u
 		LEFT OUTER JOIN orders o ON u.id = o.user_id
 		LEFT OUTER JOIN order_items oi ON o.id = oi.order_id
 		LEFT OUTER JOIN order_toppings ot ON oi.id = ot.order_item_id
+		LEFT OUTER JOIN items i ON i.id = oi.item_id
+		LEFT OUTER JOIN toppings t ON t.id = ot.topping_id
 		WHERE u.email =#{email}
 
 
