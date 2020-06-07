@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.domain.Order;
 import com.example.domain.OrderItem;
 import com.example.domain.OrderTopping;
+import com.example.domain.Status;
 import com.example.form.OrderItemForm;
 import com.example.mapper.OrderItemMapper;
 import com.example.mapper.OrderMapper;
@@ -32,8 +33,8 @@ public class AddItemService {
 	public Integer addItem(OrderItemForm orderItemForm) {
 		
 		Order order = null;
-		int status = 0;
-		int userId = 1;
+		int status = Status.BEFORE.getStatusId();
+		int userId = orderItemForm.getUserId();
 		
 		List<Order> orderList = orderMapper.findByUserIdAndStatus(userId, status);
 		

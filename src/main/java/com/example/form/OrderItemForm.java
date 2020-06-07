@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class OrderItemForm {
 
+	private Integer userId;
 	private Integer itemId;
 	private Integer quantity;
 	private Character size;
