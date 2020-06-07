@@ -14,7 +14,7 @@ public class CountCartService {
 	private OrderMapper mapper;
 	
 	public Integer count(Integer userId, Integer status) {
-		return mapper.count(userId, status);
+		return mapper.count(userId, status).size();
 	}
 	
 }

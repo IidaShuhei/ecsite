@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.domain.Order;
+import com.example.domain.OrderItem;
 
 @Mapper
 public interface OrderMapper {
@@ -17,5 +18,5 @@ public interface OrderMapper {
 	
 	public void update(Order order);
 	
-	public Integer count(Integer userId, Integer status);
+	public List<OrderItem> count(Integer userId, Integer status);
 }

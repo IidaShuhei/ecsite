@@ -18,8 +18,6 @@ public class CountCartController {
 	
 	@RequestMapping("/count")
 	public Integer count(@RequestBody Map<String, Integer> params) {
-		System.out.println(params.get("userId"));
-		System.out.println(Status.BEFORE.getStatusId());
 		return service.count(params.get("userId"), Status.BEFORE.getStatusId());
 	}
 }

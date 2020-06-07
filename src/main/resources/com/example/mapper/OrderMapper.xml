@@ -39,18 +39,6 @@
 		total_price=#{totalPrice} 
 		where id = #{id}
 	</update>
-	
-	<select id="count" resultMap="orderMap">
-		SELECT 
-		count(*) 
-		FROM 
-		order_items AS oi
-		JOIN orders AS o
-		on oi.order_id = o.id
-		WHERE
-		user_id = #{userId} 
-		AND status = #{status}
-	</select>
 
 	<!-- Order + OrderItem + OrderTopping + Topping + Item -->
 	<resultMap type="com.example.domain.Order" id="orderResultMap">
@@ -185,6 +173,59 @@
 		LEFT JOIN toppings AS t ON topping_id=t.id
 		WHERE o.user_id = #{userId} 
 		AND o.status = #{status}
+	</select>
+
+	<resultMap type="com.example.domain.Order" id="OrderItem">
+		<id property="id" column="o_id" />
+		<result property="userId" column="userId" />
+		<result property="status" column="status" />
+		<result property="totalPrice" column="total_price" />
+		<result property="orderDate" column="order_date" />
+		<result property="destinationName" column="destination_name" />
+		<result property="destinationEmail" column="destination_email" />
+		<result property="destinationZipcode" column="destination_zipcode" />
+		<result property="destinationAddress" column="destination_address" />
+		<result property="destinationTel" column="destination_tel" />
+		<result property="delivaryTime" column="delivery_time" />
+		<result property="paymentMethod" column="payment_method" />
+		
+		<collection property="orderItemList" ofType="com.example.domain.OrderItem">
+			<id property="id" column="oi_id" />
+			<result property="itemId" column="item_id" />
+			<result property="orderId" column="order_id" />
+			<result property="quantity" column="quantity" />
+			<result property="size" column="size" />
+			<result property="subTotal" column="sub_total" />
+		</collection>
+	</resultMap>
+	
+	<select id="count" resultMap="OrderItem">
+		SELECT 
+		o.id o_id,
+		o.user_id o_user_id,
+		status,
+		total_price,
+		order_date,
+		destination_name,
+		destination_email,
+		destination_zipcode,
+		destination_address,
+		destination_tel,
+		delivery_time,
+		payment_method, 
+		oi.id oi_id,
+		item_id,
+		order_id,
+		quantity,
+		size,
+		sub_total
+		FROM 
+		order_items AS oi
+		JOIN orders AS o
+		on oi.order_id = o.id
+		WHERE
+		user_id = #{userId} 
+		AND status = #{status}
 	</select>
 	
 </mapper>
