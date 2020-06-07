@@ -19,13 +19,13 @@ public class LoginUserController {
 	@Autowired
 	private LoginUserService loginUserService;
     
-	@CrossOrigin()
+	
 	@RequestMapping("/findAllByMail")
 	public User findAllByMail(@RequestBody LoginForm loginForm) {
 		return loginUserService.findAllByMail(loginForm.getEmail());
 	}
 	
-	@CrossOrigin()
+	
 	@RequestMapping("/findById")
 	public User findById(@RequestBody Map<String, Integer> param) {
 		return loginUserService.findById(param.get("userId"));
